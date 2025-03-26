@@ -1,0 +1,427 @@
+body {
+    background: #0378A6; 
+    background: -moz-linear-gradient(top, #011C40 0%, #0378A6 100%); 
+    background: -webkit-linear-gradient(top, #011C40 0%, #0378A6 100%); 
+    background: -o-linear-gradient(top, #011C40 0%, #0378A6 100%); 
+    background: linear-gradient(to bottom, #011C40 0%,#0378A6 100%);
+    color: white !important;
+    text-align: center !important; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 2rem;
+    margin: 20px 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+    color: #000; /* Set table text to black */
+}
+
+th {
+    background-color: #0378A6;
+    color: white;
+    font-size: 1.1rem;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(even) td {
+    background-color: #f1f1f1;
+}
+
+/* Table Section Styling */
+.table-section {
+    margin-bottom: 40px;
+}
+
+.table-section h2 {
+    color: #72c8f7;
+    font-size: 1.8rem;
+}
+
+/* Navigation Bar Styling */
+nav {
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    padding: 10px 0;
+    z-index: 100;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+ul li {
+    display: inline-block;
+    position: relative;
+}
+
+ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    background-color: #333;
+}
+
+ul li a:hover {
+    background-color: #026C8C;
+}
+
+ul li:hover ul.dropdown {
+    display: block;
+}
+
+ul li ul.dropdown {
+    position: absolute;
+    display: none;
+    background-color: #333;
+    padding: 0;
+    left: 0;
+    width: 200px;
+    text-align: left;
+}
+
+ul li ul.dropdown li {
+    display: block;
+}
+
+ul li ul.dropdown li a {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+form {
+    width: 60%; /* 60% of the page width */
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0 20px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+form button {
+    background-color: #0378A6;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+form button:hover {
+    background-color: #035f78;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 28px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #0378A6;
+    color: white;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Table Container */
+.table-container {
+    width: 100%;
+    max-width: 800px; /* Limit table width */
+    overflow-x: auto;
+    margin: 20px auto; /* Center the table */
+}
+
+hr {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* Hero Section */
+.hero {
+    background: url("../images/car-background.jpg") center/cover no-repeat;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Hero Section */
+.hero {
+    background: url("../images/car-background.jpg") center/cover no-repeat;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Overlay */
+.hero .overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 10px;
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Typing Effect */
+.typing-text {
+    font-size: 36px;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid white;
+    width: 0;
+    animation: typing 3s steps(40, end) forwards, blink 0.7s infinite;
+}
+
+/* Text Fade-in */
+.fade-in {
+    font-size: 20px;
+    color: #ddd;
+    opacity: 0;
+    animation: fadeIn 3s 3.5s forwards;
+}
+
+/* Moving Car Animation */
+.moving-car {
+    position: absolute;
+    bottom: 10px;
+    left: -100px;
+    width: 80px;
+    height: 40px;
+    background: url("../images/car-icon.png") no-repeat center/contain;
+    animation: drive 4s ease-out forwards;
+}
+
+/* Keyframes for Typing Effect */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* Keyframes for Fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Keyframes for Moving Car */
+@keyframes drive {
+    from {
+        left: -100px;
+    }
+    to {
+        left: calc(100% - 90px); /* Stops near the right corner */
+    }
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #ddd;
+}
+
+/* About Section */
+.about {
+    text-align: center;
+    padding: 50px 20px;
+    color: black;
+}
+
+.about h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.about-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    max-width: 300px;
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature img {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.feature h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 16px;
+}
+
+/* Featured Listings */
+.listings {
+    text-align: center;
+    padding: 50px 20px;
+    color: black;
+}
+
+.listings h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.listings-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.listing {
+    max-width: 300px;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.listing img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.listing h3 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.listing p {
+    font-size: 16px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 28, 64, 0.9);
+    margin-top: 30px;
+    color: white;
+}

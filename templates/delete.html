@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
+
+    <title>Delete Data</title>
+    <script>
+        let validIDs = new Set(); // Stores valid IDs for the selected table
+
+        function fetchEntries() {
+            let table = document.getElementById("deleteTable").value;
+            if (table) {
+                fetch(`/get_entries?table=${table}`)
+                    .then(response => response.text())
+                    .then(text => {
+                        let lines = text.trim().split("\n");
+                        let tableContent = "<tr><th>ID</th><th>Entries</th></tr>";
+
+                        validIDs.clear(); // Reset the valid IDs set
+
+                        if (lines.length > 1) {
+                            let headers = lines[0].split(";");
+                            tableContent = "<tr>" + headers.map(h => `<th>${h}</th>`).join("") + "</tr>";
+
+                            for (let i = 1; i < lines.length; i++) {
+                                let row = lines[i].split(";");
+                                tableContent += "<tr>" + row.map(cell => `<td>${cell}</td>`).join("") + "</tr>";
+
+                                // Assume the first column is the ID column, store valid IDs
+                                validIDs.add(row[0]);
+                            }
+                        } else {
+                            tableContent = "<tr><td colspan='100%'>No entries found</td></tr>";
+                        }
+
+                        document.getElementById("entriesTable").innerHTML = tableContent;
+                    })
+                    .catch(error => console.error("Error fetching data:", error));
+            }
+        }
+
+        function validateForm(event) {
+            let idInput = document.getElementById("deleteID").value;
+            
+            if (!validIDs.has(idInput)) {
+                event.preventDefault(); // Stop form submission
+                document.getElementById("error-message").innerText = "Invalid ID. Please enter a valid ID from the table.";
+                return false;
+            }
+
+            document.getElementById("error-message").innerText = ""; // Clear error message if valid
+            return true;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const tableSelect = document.getElementById("deleteTable");
+            tableSelect.addEventListener("change", fetchEntries);
+            fetchEntries(); // Load initial entries
+
+            document.getElementById("deleteForm").addEventListener("submit", validateForm);
+        });
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li>
+                <a href="#">Add Entry ▾</a>
+                <ul class="dropdown">
+                    <li><a href="/add_manufacturer">Add Manufacturer</a></li>
+                    <li><a href="/add_car">Add Car</a></li>
+                    <li><a href="/add_bodytype">Add Body Type</a></li>
+                    <li><a href="/add_customer">Add Customer</a></li>
+                    <li><a href="/add_order">Add Order</a></li>
+                </ul>
+            </li>
+            <li><a href="/list">View Data</a></li>
+            <li><a href="/delete">Delete Entry</a></li>
+            <li><a href="/info">Info</a></li>
+            <li><a href="/modify">Modify Entry</a></li>
+        </ul>
+    </nav>
+
+    <h1>Delete Database Entry</h1>
+
+    <form id="deleteForm" action="/delete" method="post">
+        <label for="deleteTable">Select Table:</label>
+        <select name="table" id="deleteTable">
+            <option value="manufacturer">Manufacturer</option>
+            <option value="car">Car</option>
+            <option value="bodytype">Body Type</option>
+            <option value="customer">Customer</option>
+            <option value="orders">Order</option>
+        </select>
+
+        <label for="id">Enter ID:</label>
+        <input type="number" name="id" id="deleteID" required>
+        
+        <p id="error-message" style="color: red;"></p> <!-- Error message display -->
+
+        <button type="submit">Delete</button>
+    </form>
+
+    <h2>Current Table Entries</h2>
+    <div class="table-container">
+        <table border="1" id="entriesTable">
+            <tr>
+                <th>Entries will be shown here</th>
+            </tr>
+        </table>
+    </div>
+    <br><br>
+
+    <footer>
+        <p>&copy; 2024 Car Database. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
