@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from dotenv import load_dotenv
 import psycopg2
 import os
@@ -8,6 +8,17 @@ load_dotenv()
 app = Flask(__name__)
 url = os.getenv('DATABASE_URL')
 connection = psycopg2.connect(url)
+
+# Serve static CSS files from the 'static/css' directory
+@app.route('/static/css/<filename>')
+def serve_css(filename):
+    if filename.endswith('.css'):
+        mimetype = 'text/css'
+    else:
+        mimetype = 'application/octet-stream'
+
+    return send_from_directory(os.path.join(app.root_path, 'static/css'), filename, mimetype=mimetype)
+
 
 @app.get('/')
 def home():
