@@ -284,3 +284,6 @@ def get_entries():
         except psycopg2.Error as e:
             return f"Error: {e}"
     return "No data found"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000, debug=False)
