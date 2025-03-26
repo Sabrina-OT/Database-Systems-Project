@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}">
+
+    <title>Modify Data</title>
+    <script>
+        let validIDs = new Set(); // Stores valid IDs for the selected table
+        let validColumns = []; // Stores valid column names for the selected table
+
+        function fetchEntries() {
+            let table = document.getElementById("modifyTable").value;
+            if (table) {
+                fetch(`/get_entries?table=${table}`)
+                    .then(response => response.text())
+                    .then(text => {
+                        let lines = text.trim().split("\n");
+                        let tableContent = "<tr><th>ID</th><th>Entries</th></tr>";
+
+                        validIDs.clear(); // Reset valid ID storage
+                        validColumns = []; // Reset valid column names
+
+                        if (lines.length > 1) {
+                            let headers = lines[0].split(";");
+                            validColumns = headers; // Store column names
+                            tableContent = "<tr>" + headers.map(h => `<th>${h}</th>`).join("") + "</tr>";
+
+                            for (let i = 1; i < lines.length; i++) {
+                                let row = lines[i].split(";");
+                                tableContent += "<tr>" + row.map(cell => `<td>${cell}</td>`).join("") + "</tr>";
+
+                                // Assume the first column is the ID column, store valid IDs
+                                validIDs.add(row[0]);
+                            }
+                        } else {
+                            tableContent = "<tr><td colspan='100%'>No entries found</td></tr>";
+                        }
+
+                        document.getElementById("entriesTable").innerHTML = tableContent;
+                    })
+                    .catch(error => console.error("Error fetching data:", error));
+            }
+        }
+
+        function validateForm(event) {
+            let idInput = document.getElementById("modifyID").value;
+            let columnInput = document.getElementById("modifyColumn").value;
+
+            // Validate if ID is valid
+            if (!validIDs.has(idInput)) {
+                event.preventDefault(); // Stop form submission
+                document.getElementById("error-message").innerText = "Invalid ID. Please enter a valid ID from the table.";
+                return false;
+            }
+
+            // Validate if column is valid
+            if (!validColumns.includes(columnInput)) {
+                event.preventDefault(); // Stop form submission
+                document.getElementById("error-message").innerText = `Invalid column name. Please choose a valid column from the table.`;
+                return false;
+            }
+
+            document.getElementById("error-message").innerText = ""; // Clear error message if valid
+            return true;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const tableSelect = document.getElementById("modifyTable");
+            tableSelect.addEventListener("change", fetchEntries); // Fetch data on table change
+            fetchEntries(); // Load initial entries
+
+            document.getElementById("modifyForm").addEventListener("submit", validateForm); // Validate form on submit
+        });
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li>
+                <a href="#">Add Entry ▾</a>
+                <ul class="dropdown">
+                    <li><a href="/add_manufacturer">Add Manufacturer</a></li>
+                    <li><a href="/add_car">Add Car</a></li>
+                    <li><a href="/add_bodytype">Add Body Type</a></li>
+                    <li><a href="/add_customer">Add Customer</a></li>
+                    <li><a href="/add_order">Add Order</a></li>
+                </ul>
+            </li>
+            <li><a href="/list">View Data</a></li>
+            <li><a href="/delete">Delete Entry</a></li>
+            <li><a href="/info">Info</a></li>
+            <li><a href="/modify">Modify Entry</a></li>
+        </ul>
+    </nav>
+
+    <h1>Modify Database Entry</h1>
+    
+    <!-- Select Table Dropdown -->
+    <form id="modifyForm" action="/modify" method="post">
+        <label for="modifyTable">Select Table:</label>
+        <select name="table" id="modifyTable">
+            <option value="manufacturer" selected>Manufacturer</option> <!-- Default to Manufacturer -->
+            <option value="car">Car</option>
+            <option value="bodytype">Body Type</option>
+            <option value="customer">Customer</option>
+            <option value="orders">Order</option>
+        </select>
+
+        <label for="id">Record ID:</label>
+        <input type="number" name="id" id="modifyID" required>
+
+        <label for="column">Column to Modify:</label>
+        <input type="text" name="column" id="modifyColumn" required>
+
+        <label for="new_value">New Value:</label>
+        <input type="text" name="new_value" required>
+
+        <button type="submit">Modify Entry</button>
+
+        <p id="error-message" style="color: red;"></p> <!-- Error message display -->
+
+    </form>
+
+    <h2>Current Table Entries</h2>
+    <div class="table-container">
+        <table border="1" id="entriesTable">
+            <tr>
+                <th>Entries will be shown here</th>
+            </tr>
+        </table>
+    </div>
+    <br><br>
+
+    <footer>
+        <p>&copy; 2024 Car Database. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

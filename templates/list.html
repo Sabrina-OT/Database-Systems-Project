@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li>
+                <a href="#">Add Entry ▾</a>
+                <ul class="dropdown">
+                    <li><a href="/add_manufacturer">Add Manufacturer</a></li>
+                    <li><a href="/add_car">Add Car</a></li>
+                    <li><a href="/add_bodytype">Add Body Type</a></li>
+                    <li><a href="/add_customer">Add Customer</a></li>
+                    <li><a href="/add_order">Add Order</a></li>
+                </ul>
+            </li>
+            <li><a href="/list">View Data</a></li>
+            <li><a href="/delete">Delete Entry</a></li>
+            <li><a href="/info">Info</a></li>
+            <li><a href="/modify">Modify Entry</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Data List</h1>
+        <hr><br>
+        
+        <div class="table-section">
+            <h2>Manufacturers List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Colour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for manufacturer in manufacturers %}
+                    <tr>
+                        <td>{{ manufacturer[0] }}</td>
+                        <td>{{ manufacturer[1] }}</td>
+                        <td>{{ manufacturer[2] }}</td>
+                        <td>{{ manufacturer[3] }}</td>
+                        <td>{{ manufacturer[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-section">
+            <h2>Cars List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Mileage</th>
+                        <th>Price</th>
+                        <th>Transmission</th>
+                        <th>Manufacturer ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for car in cars %}
+                    <tr>
+                        <td>{{ car[0] }}</td>
+                        <td>{{ car[1] }}</td>
+                        <td>{{ car[2] }}</td>
+                        <td>{{ car[3] }}</td>
+                        <td>{{ car[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-section">
+            <h2>Body Types List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Number of Doors</th>
+                        <th>Car ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for body in bodytypes %}
+                    <tr>
+                        <td>{{ body[0] }}</td>
+                        <td>{{ body[1] }}</td>
+                        <td>{{ body[2] }}</td>
+                        <td>{{ body[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-section">
+            <h2>Customers List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Order ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                        <td>{{ customer[0] }}</td>
+                        <td>{{ customer[1] }}</td>
+                        <td>{{ customer[2] }}</td>
+                        <td>{{ customer[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-section">
+            <h2>Orders List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Car ID</th>
+                        <th>Customer ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order[0] }}</td>
+                        <td>{{ order[1] }}</td>
+                        <td>{{ order[2] }}</td>
+                        <td>{{ order[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Car Database. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
